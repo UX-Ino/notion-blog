@@ -22,6 +22,7 @@ import { getCanonicalPageUrl, mapPageUrl } from '@/lib/map-page-url'
 import { searchNotion } from '@/lib/search-notion'
 import { useDarkMode } from '@/lib/use-dark-mode'
 
+import { ClientSideNotionRenderer } from './ClientSideNotionRenderer'
 import { Footer } from './Footer'
 import { GitHubShareButton } from './GitHubShareButton'
 import { Loading } from './Loading'
@@ -215,6 +216,13 @@ export function NotionPage({
 
   const { isDarkMode } = useDarkMode()
 
+  const [hasMounted, setHasMounted] = React.useState(false)
+  React.useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  const darkMode = isDarkMode && hasMounted
+
   const siteMapPageUrl = React.useMemo(() => {
     const params: any = {}
     if (lite) params.lite = lite
@@ -301,14 +309,14 @@ export function NotionPage({
       />
 
       {isLiteMode && <BodyClassName className='notion-lite' />}
-      {isDarkMode && <BodyClassName className='dark-mode' />}
+      {darkMode && <BodyClassName className='dark-mode' />}
 
-      <NotionRenderer
+      <ClientSideNotionRenderer
         bodyClassName={cs(
           styles.notion,
           pageId === site.rootNotionPageId && 'index-page'
         )}
-        darkMode={isDarkMode}
+        darkMode={darkMode}
         components={components}
         recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
