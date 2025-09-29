@@ -1,13 +1,19 @@
+"use client";
+import { useState } from "react";
 import { Card } from "./ui/card";
+import { Input } from "./ui/input";
 import { Badge } from "./ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Heart, Users, MessageCircle, Calendar } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Heart, Users, MessageCircle, Calendar, Tag, Search } from "lucide-react";
+
+// Note: AvatarImage uses a plain <img> under the hood; acceptable for avatar.
 
 export function ProfileSection() {
   const todayVisitors = 42;
   const totalVisitors = 12834;
   const skillStack = ["React", "TypeScript", "Node.js", "Python", "PostgreSQL"];
+  const categories = ["React", "TypeScript", "CSS", "Next.js", "개발도구"];
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="space-y-4">
@@ -23,12 +29,12 @@ export function ProfileSection() {
               ✨
             </div>
           </div>
-          
+
           <h2 className="text-lg mb-2 text-slate-100">레트로 개발자의 미니홈피</h2>
           <p className="text-sm text-slate-300 mb-4">
             안녕하세요! 추억의 싸이월드 감성으로 개발 이야기를 들려드립니다 🌈
           </p>
-          
+
           {/* 방문자 수 */}
           <div className="bg-slate-700/50 rounded-lg p-3 mb-4 border border-slate-600">
             <div className="flex justify-between items-center text-sm">
@@ -49,71 +55,33 @@ export function ProfileSection() {
         </div>
       </Card>
 
-      {/* 기술 스택 */}
+      {/* 검색 및 필터 */}
       <Card className="bg-gradient-to-r from-slate-800 to-gray-800 border-2 border-slate-700">
         <div className="p-4">
-          <h3 className="mb-3 text-cyan-400 flex items-center gap-2">
-            💻 My Tech Stack
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {skillStack.map((skill) => (
-              <Badge 
-                key={skill} 
-                variant="secondary" 
-                className="bg-slate-700 text-cyan-300 border border-slate-600 hover:bg-slate-600 transition-colors"
-              >
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      </Card>
-
-      {/* 메뉴 */}
-      <Card className="bg-gradient-to-b from-slate-800 to-gray-800 border-2 border-slate-700">
-        <div className="p-4">
-          <h3 className="mb-3 text-orange-400">📋 Menu</h3>
-          <nav className="space-y-2">
-            <a href="#" className="block p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600 transition-colors text-sm text-slate-200 hover:text-white">
-              🏠 홈
-            </a>
-            <a href="#" className="block p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600 transition-colors text-sm text-slate-200 hover:text-white">
-              📝 다이어리
-            </a>
-            <a href="#" className="block p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600 transition-colors text-sm text-slate-200 hover:text-white">
-              📷 사진첩
-            </a>
-            <a href="#" className="block p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600 transition-colors text-sm text-slate-200 hover:text-white">
-              💌 방명록
-            </a>
-            <a href="#" className="block p-2 rounded-lg bg-slate-700/50 hover:bg-slate-600 transition-colors text-sm text-slate-200 hover:text-white">
-              ⚙️ 관리
-            </a>
-          </nav>
-        </div>
-      </Card>
-
-      {/* 최근 방명록 */}
-      <Card className="bg-gradient-to-b from-slate-800 to-gray-800 border-2 border-slate-700">
-        <div className="p-4">
-          <h3 className="mb-3 text-emerald-400 flex items-center gap-2">
-            <MessageCircle className="w-4 h-4" />
-            최근 방명록
-          </h3>
-          <div className="space-y-2 text-sm">
-            <div className="bg-slate-700/50 p-2 rounded">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-emerald-300">김개발</span>
-                <span className="text-xs text-slate-400">2시간 전</span>
-              </div>
-              <p className="text-slate-300">블로그 디자인 너무 예뻐요! 추억이 새록새록 🥹</p>
+          <div className="flex flex-col gap-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+              <Input
+                placeholder="블로그 내 검색..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-slate-700/50 border-slate-600 text-slate-200 placeholder:text-slate-400"
+              />
             </div>
-            <div className="bg-slate-700/50 p-2 rounded">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-emerald-300">박프론트</span>
-                <span className="text-xs text-slate-400">1일 전</span>
-              </div>
-              <p className="text-slate-300">TypeScript 포스팅 정말 도움됐어요!</p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm text-blue-400 flex items-center gap-1">
+                <Tag className="w-4 h-4" />
+                카테고리:
+              </span>
+              {categories.map((category) => (
+                <Badge
+                  key={category}
+                  variant="secondary"
+                  className="bg-slate-700 text-blue-300 border border-slate-600 hover:bg-slate-600 cursor-pointer transition-colors"
+                >
+                  {category}
+                </Badge>
+              ))}
             </div>
           </div>
         </div>

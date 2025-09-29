@@ -1,7 +1,10 @@
+"use client";
 import { ProfileSection } from "./components/ProfileSection";
 import { MainContent } from "./components/MainContent";
 
-export default function App() {
+export type ViewKey = "home" | "diary" | "photos" | "guestbook" | "admin";
+
+export default function App({ initialView = "home" }: { initialView?: ViewKey }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
       {/* 싸이월드 스타일 배경 패턴 */}
@@ -15,13 +18,13 @@ export default function App() {
       <div className="relative z-10 container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-[320px_1fr] gap-8">
           {/* 좌측: 프로필 섹션 (미니홈피 스타일) */}
-          <div className="lg:sticky lg:top-8 lg:h-fit">
+          <div className="lg:sticky lg:top-17 lg:h-fit">
             <ProfileSection />
           </div>
 
           {/* 우측: 메인 콘텐츠 */}
           <div className="min-h-screen">
-            <MainContent />
+            <MainContent initialView={initialView} />
           </div>
         </div>
       </div>
@@ -32,9 +35,7 @@ export default function App() {
           <div className="flex items-center gap-2 text-sm">
             <span className="text-purple-400">🎵</span>
             <span className="text-slate-300 hidden sm:inline">추억의 BGM</span>
-            <button className="text-purple-400 hover:text-purple-300 transition-colors">
-              ⏸️
-            </button>
+            <button className="text-purple-400 hover:text-purple-300 transition-colors">⏸️</button>
           </div>
         </div>
       </div>

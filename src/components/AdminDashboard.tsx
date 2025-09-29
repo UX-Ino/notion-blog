@@ -1,3 +1,4 @@
+"use client";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -5,26 +6,28 @@ import { Textarea } from "./ui/textarea";
 import { Badge } from "./ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { LoginForm } from "./LoginForm";
-import { 
-  BarChart3, 
-  Users, 
-  FileText, 
-  MessageCircle, 
-  Heart, 
-  Eye, 
-  TrendingUp, 
+import {
+  BarChart3,
+  Users,
+  FileText,
+  MessageCircle,
+  Heart,
+  Eye,
+  TrendingUp,
   Calendar,
   Edit,
   Trash2,
   Plus,
   Settings,
-  LogOut
+  LogOut,
 } from "lucide-react";
 import { useState } from "react";
 
 export function AdminDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'posts' | 'comments' | 'guestbook' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<
+    "dashboard" | "posts" | "comments" | "guestbook" | "settings"
+  >("dashboard");
 
   const handleLogin = (success: boolean) => {
     setIsLoggedIn(success);
@@ -32,7 +35,7 @@ export function AdminDashboard() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setActiveTab('dashboard');
+    setActiveTab("dashboard");
   };
 
   // 로그인하지 않은 경우 로그인 폼 표시
@@ -41,12 +44,8 @@ export function AdminDashboard() {
       <div className="space-y-6">
         <Card className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 border border-slate-700">
           <div className="p-6 text-center">
-            <h1 className="text-2xl mb-2 text-white">
-              ⚙️ 관리자 페이지
-            </h1>
-            <p className="text-slate-300">
-              블로그 관리 기능에 접근하려면 로그인이 필요합니다
-            </p>
+            <h1 className="text-2xl mb-2 text-white">⚙️ 관리자 페이지</h1>
+            <p className="text-slate-300">블로그 관리 기능에 접근하려면 로그인이 필요합니다</p>
           </div>
         </Card>
         <LoginForm onLogin={handleLogin} />
@@ -64,15 +63,33 @@ export function AdminDashboard() {
     popularPosts: [
       { title: "React 18의 새로운 기능들", views: 234, likes: 12 },
       { title: "TypeScript 타입 시스템", views: 189, likes: 15 },
-      { title: "싸이월드 감성 블로그", views: 156, likes: 23 }
-    ]
+      { title: "싸이월드 감성 블로그", views: 156, likes: 23 },
+    ],
   };
 
   // 최근 댓글
   const recentComments = [
-    { id: 1, author: "김개발", content: "정말 유용한 포스팅이네요!", postTitle: "React 18 기능들", createdAt: "2시간 전" },
-    { id: 2, author: "박프론트", content: "설명이 너무 잘 되어있어요", postTitle: "TypeScript 타입", createdAt: "4시간 전" },
-    { id: 3, author: "이백엔드", content: "코드 예시가 도움됐습니다", postTitle: "Node.js 최적화", createdAt: "1일 전" }
+    {
+      id: 1,
+      author: "김개발",
+      content: "정말 유용한 포스팅이네요!",
+      postTitle: "React 18 기능들",
+      createdAt: "2시간 전",
+    },
+    {
+      id: 2,
+      author: "박프론트",
+      content: "설명이 너무 잘 되어있어요",
+      postTitle: "TypeScript 타입",
+      createdAt: "4시간 전",
+    },
+    {
+      id: 3,
+      author: "이백엔드",
+      content: "코드 예시가 도움됐습니다",
+      postTitle: "Node.js 최적화",
+      createdAt: "1일 전",
+    },
   ];
 
   const renderDashboard = () => (
@@ -137,7 +154,10 @@ export function AdminDashboard() {
           </h3>
           <div className="space-y-3">
             {stats.popularPosts.map((post, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg"
+              >
                 <div className="flex items-center gap-3">
                   <span className="text-orange-400 w-6">{index + 1}.</span>
                   <span className="text-slate-300">{post.title}</span>
@@ -188,8 +208,7 @@ export function AdminDashboard() {
             <h3 className="text-white mb-4">빠른 작업</h3>
             <div className="space-y-3">
               <Button className="w-full justify-start bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
-                <Plus className="w-4 h-4 mr-2" />
-                새 게시글 작성
+                <Plus className="w-4 h-4 mr-2" />새 게시글 작성
               </Button>
               <Button className="w-full justify-start bg-slate-700 hover:bg-slate-600 text-white">
                 <Settings className="w-4 h-4 mr-2" />
@@ -211,8 +230,7 @@ export function AdminDashboard() {
       <div className="flex items-center justify-between">
         <h2 className="text-xl text-white">게시글 관리</h2>
         <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white">
-          <Plus className="w-4 h-4 mr-2" />
-          새 게시글
+          <Plus className="w-4 h-4 mr-2" />새 게시글
         </Button>
       </div>
 
@@ -220,21 +238,34 @@ export function AdminDashboard() {
         <div className="p-6">
           <div className="space-y-4">
             {[1, 2, 3].map((post) => (
-              <div key={post} className="flex items-center justify-between p-4 bg-slate-700/50 rounded-lg">
+              <div
+                key={post}
+                className="flex items-center justify-between p-4 bg-slate-700/50 rounded-lg"
+              >
                 <div className="flex-1">
                   <h3 className="text-white mb-1">React 18의 새로운 기능들과 개발 환경 세팅하기</h3>
                   <div className="flex items-center gap-4 text-sm text-slate-400">
                     <span>React</span>
                     <span>2024.01.15</span>
                     <span>조회 234회</span>
-                    <Badge variant="secondary" className="bg-green-900 text-green-300">Published</Badge>
+                    <Badge variant="secondary" className="bg-green-900 text-green-300">
+                      Published
+                    </Badge>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button size="sm" variant="ghost" className="text-slate-400 hover:text-white hover:bg-slate-700">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="text-slate-400 hover:text-white hover:bg-slate-700"
+                  >
                     <Edit className="w-4 h-4" />
                   </Button>
-                  <Button size="sm" variant="ghost" className="text-red-400 hover:text-red-300 hover:bg-red-900/20">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                  >
                     <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
@@ -248,15 +279,15 @@ export function AdminDashboard() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'dashboard':
+      case "dashboard":
         return renderDashboard();
-      case 'posts':
+      case "posts":
         return renderPostManagement();
-      case 'comments':
+      case "comments":
         return <div className="text-white">댓글 관리 페이지</div>;
-      case 'guestbook':
+      case "guestbook":
         return <div className="text-white">방명록 관리 페이지</div>;
-      case 'settings':
+      case "settings":
         return <div className="text-white">설정 페이지</div>;
       default:
         return renderDashboard();
@@ -270,12 +301,8 @@ export function AdminDashboard() {
         <div className="p-6">
           <div className="flex items-center justify-between">
             <div className="text-center flex-1">
-              <h1 className="text-2xl mb-2 text-white">
-                ⚙️ 관리자 대시보드
-              </h1>
-              <p className="text-slate-300">
-                블로그 운영 현황을 한눈에 확인하고 관리하세요
-              </p>
+              <h1 className="text-2xl mb-2 text-white">⚙️ 관리자 대시보드</h1>
+              <p className="text-slate-300">블로그 운영 현황을 한눈에 확인하고 관리하세요</p>
             </div>
             <Button
               variant="ghost"
@@ -295,11 +322,11 @@ export function AdminDashboard() {
         <div className="p-4">
           <nav className="flex gap-2 flex-wrap">
             {[
-              { key: 'dashboard', label: '📊 대시보드' },
-              { key: 'posts', label: '📝 게시글' },
-              { key: 'comments', label: '💬 댓글' },
-              { key: 'guestbook', label: '💌 방명록' },
-              { key: 'settings', label: '⚙️ 설정' },
+              { key: "dashboard", label: "📊 대시보드" },
+              { key: "posts", label: "📝 게시글" },
+              { key: "comments", label: "💬 댓글" },
+              { key: "guestbook", label: "💌 방명록" },
+              { key: "settings", label: "⚙️ 설정" },
             ].map(({ key, label }) => (
               <Button
                 key={key}

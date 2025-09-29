@@ -16,28 +16,28 @@ interface BlogPostProps {
   onClick?: () => void;
 }
 
-export function BlogPost({ 
-  title, 
-  content, 
-  category, 
-  createdAt, 
-  views, 
-  likes, 
-  comments, 
+export function BlogPost({
+  title,
+  content,
+  category,
+  createdAt,
+  views,
+  likes,
+  comments,
   isPreview = false,
-  onClick
+  onClick,
 }: BlogPostProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   return (
-    <Card 
+    <Card
       className="bg-gradient-to-br from-slate-800 via-gray-800 to-slate-900 border-2 border-slate-700 shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
       onClick={onClick}
     >
@@ -52,8 +52,8 @@ export function BlogPost({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-slate-200">레트로 개발자</span>
-                <Badge 
-                  variant="secondary" 
+                <Badge
+                  variant="secondary"
                   className="bg-purple-900/50 text-purple-300 border border-purple-700 text-xs"
                 >
                   {category}
@@ -68,9 +68,7 @@ export function BlogPost({
         </div>
 
         {/* 제목 */}
-        <h2 className="text-xl mb-3 text-slate-100 leading-relaxed">
-          {title}
-        </h2>
+        <h2 className="text-xl mb-3 text-slate-100 leading-relaxed">{title}</h2>
 
         {/* 내용 */}
         <div className="prose prose-sm max-w-none mb-4">
@@ -84,14 +82,12 @@ export function BlogPost({
               )}
             </p>
           ) : (
-            <div className="text-slate-300 leading-relaxed whitespace-pre-wrap">
-              {content}
-            </div>
+            <div className="text-slate-300 leading-relaxed whitespace-pre-wrap">{content}</div>
           )}
         </div>
 
         {/* 코드 블록 예시 (실제 게시글에서는 마크다운 파싱 필요) */}
-        {!isPreview && content.includes('```') && (
+        {!isPreview && content.includes("```") && (
           <div className="bg-gray-900 rounded-lg p-4 mb-4 border border-gray-700">
             <pre className="text-green-400 text-sm overflow-x-auto">
               <code>{`const greeting = "Hello, Cyworld!";
@@ -116,9 +112,9 @@ console.log(greeting);`}</code>
               {comments}
             </span>
           </div>
-          
+
           {isPreview && onClick && (
-            <button 
+            <button
               className="text-purple-400 hover:text-purple-300 text-sm hover:underline"
               onClick={(e) => {
                 e.stopPropagation();

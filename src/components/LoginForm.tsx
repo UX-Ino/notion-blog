@@ -10,23 +10,23 @@ interface LoginFormProps {
 
 export function LoginForm({ onLogin }: LoginFormProps) {
   const [credentials, setCredentials] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     // 간단한 데모용 로그인 (실제로는 백엔드 API 호출)
     setTimeout(() => {
-      if (credentials.username === 'admin' && credentials.password === 'password') {
+      if (credentials.username === "admin" && credentials.password === "password") {
         onLogin(true);
       } else {
-        setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+        setError("아이디 또는 비밀번호가 올바르지 않습니다.");
         onLogin(false);
       }
       setIsLoading(false);
@@ -43,9 +43,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
               <Lock className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-xl text-slate-100 mb-2">관리자 로그인</h2>
-            <p className="text-sm text-slate-400">
-              관리 페이지에 접근하려면 로그인이 필요합니다
-            </p>
+            <p className="text-sm text-slate-400">관리 페이지에 접근하려면 로그인이 필요합니다</p>
           </div>
 
           {/* 로그인 폼 */}
@@ -56,7 +54,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
                 type="text"
                 placeholder="아이디"
                 value={credentials.username}
-                onChange={(e) => setCredentials(prev => ({ ...prev, username: e.target.value }))}
+                onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
                 className="pl-10 bg-slate-700/50 border-slate-600 text-slate-200 placeholder:text-slate-400"
                 required
               />
@@ -68,7 +66,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
                 type="password"
                 placeholder="비밀번호"
                 value={credentials.password}
-                onChange={(e) => setCredentials(prev => ({ ...prev, password: e.target.value }))}
+                onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
                 className="pl-10 bg-slate-700/50 border-slate-600 text-slate-200 placeholder:text-slate-400"
                 required
               />
@@ -80,8 +78,8 @@ export function LoginForm({ onLogin }: LoginFormProps) {
               </div>
             )}
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
               disabled={isLoading}
             >
@@ -101,9 +99,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
           {/* 데모 안내 */}
           <div className="mt-6 p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-            <p className="text-xs text-slate-400 text-center mb-2">
-              💡 데모용 계정 정보
-            </p>
+            <p className="text-xs text-slate-400 text-center mb-2">💡 데모용 계정 정보</p>
             <div className="text-xs text-slate-300 space-y-1">
               <div>아이디: admin</div>
               <div>비밀번호: password</div>
